@@ -18,7 +18,7 @@ func main() {
 
 	//Embora tenha uma variavel com o mesmo nome da funcao sendo
 	//chamada o valor exibido e o original da funcao, como se fosse
-	//uma memoria
+	//uma "memoria"
 	funcaoNova := closure()
 	funcaoNova()
 }
