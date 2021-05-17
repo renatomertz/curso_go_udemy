@@ -17,7 +17,7 @@ func escreverArea(f forma) {
 	fmt.Printf("A area da forma e %0.2f\n", f.area())
 }
 
-//Para implementar a interface tem que atender  requisito:
+//Para implementar a interface tem que atender o requisito:
 //1 - Criar um metodo para o struct com o mesmo NOME e RETORNO
 //que tem a INTERFACE
 func (r retangulo) area() float64 {

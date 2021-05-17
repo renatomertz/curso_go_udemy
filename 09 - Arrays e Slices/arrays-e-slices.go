@@ -39,7 +39,7 @@ func main() {
 
 	//Arrays Internos
 	fmt.Println(("-------------"))
-	//Cria um array do tipo float32 com tamanho 11 (ultimo parametro), cria o slice
+	//Cria um array do tipo float32 com tamanho 6 (ultimo parametro), cria o slice
 	//apontando para as 10 primeiras posicoes (primeiro parametro)
 	slice3 := make([]float32, 5, 6)
 	fmt.Println(("Apos criacao"))
