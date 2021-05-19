@@ -28,6 +28,18 @@ func Gerar() *cli.App {
 			Flags:  flags,
 			Action: buscarIps,
 		},
+		{
+			Name:   "cname",
+			Usage:  "Busca CNAMES de enderecos na internet",
+			Flags:  flags,
+			Action: buscarCname,
+		},
+		{
+			Name:   "servers",
+			Usage:  "Busca o nome do servidores na internet",
+			Flags:  flags,
+			Action: buscarServers,
+		},
 	}
 	return app
 }
@@ -41,4 +53,27 @@ func buscarIps(c *cli.Context) {
 	for _, ip := range ips {
 		fmt.Println(ip)
 	}
+}
+
+func buscarCname(c *cli.Context) {
+	host := c.String("host")
+	cname, erro := net.LookupCNAME(host)
+	if erro != nil {
+		log.Fatal(erro)
+	}
+	fmt.Println(cname)
+}
+
+func buscarServers(c *cli.Context) {
+	host := c.String("host")
+
+	servidores, erro := net.LookupNS(host) // name server
+	if erro != nil {
+		log.Fatal(erro)
+	}
+
+	for _, servidor := range servidores {
+		fmt.Println(servidor.Host)
+	}
+
 }
