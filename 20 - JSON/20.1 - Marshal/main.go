@@ -22,7 +22,7 @@ func main() {
 		log.Fatal(erro)
 	}
 
-	//JSON sai em bytes
+	//Resposta é um slice de bytes
 	fmt.Println(dogJSON)
 
 	fmt.Println(bytes.NewBuffer(dogJSON))
