@@ -60,3 +60,41 @@ func CriarUsuario(rw http.ResponseWriter, r *http.Request) {
 	rw.Write([]byte(fmt.Sprintf("Usuario isnsrido com sucesso! ID: %d", id)))
 
 }
+
+//Retorna todos os usuarios
+func BuscarUsuarios(rw http.ResponseWriter, r *http.Request) {
+	db, erro := banco.Conectar()
+	if erro != nil {
+		rw.Write([]byte("Erro ao conectar no banco de dados"))
+		return
+	}
+	defer db.Close()
+
+	linhas, erro := db.Query("SELECT id, nome, email FROM usuarios")
+	if erro != nil {
+		rw.Write([]byte("Erro ao listar usuarios."))
+		return
+	}
+	defer linhas.Close()
+
+	var usuarios []usuario
+	for linhas.Next() {
+		var usuario usuario
+		if erro := linhas.Scan(&usuario.ID, &usuario.Nome, &usuario.Email); erro != nil {
+			rw.Write([]byte("Erro ao escaner o usuario."))
+			return
+		}
+		usuarios = append(usuarios, usuario)
+	}
+	rw.WriteHeader(http.StatusOK)
+
+	if erro := json.NewEncoder(rw).Encode(usuarios); erro != nil {
+		rw.Write([]byte("Erro ao escaner o usuario."))
+		return
+	}
+}
+
+//Retorna um usuario especifico
+func BuscarUsuario(rw http.ResponseWriter, r *http.Request) {
+
+}
